@@ -12,9 +12,19 @@ const getState = ({ getStore, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			peopleStorage: []
 		},
 		actions: {
+			getPeople: url => {
+				fetch(url)
+					.then(res => res.json())
+					.then(character => {
+						console.log("AQUI PASO EL FLUX", character);
+						setStore({ peopleStorage: character.results });
+					});
+			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
